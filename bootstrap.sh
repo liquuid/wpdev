@@ -36,13 +36,23 @@ echo "---> Configuring apache2 vhost"
 cp -v $VAGRANT_PATH/templates/vhost.conf /etc/apache2/sites-available/ && \
 
 echo "--> Installing wordpress"
-./get_wordpress.sh
+echo
+echo "Getting latest wordpress source code ..."
+echo
+curl "https://wordpress.org/latest.zip" -o /tmp/latest.zip &&
+echo
+echo "Installing source on template ..."
+unzip -q /tmp/latest.zip -d $VAGRANT_PATH/src &&
+mv $VAGRANT_PATH/src/wordpress/* $VAGRANT_PATH/src/ &&
+echo 
+echo "Done!"
+
 
 echo "---> Configuring wp-config"
 cp -v $VAGRANT_PATH/templates/wp-config-sample.php $VAGRANT_PATH/src/wp-config.php && \
 
 echo "---> cp htaccess template"
-cp -v $VAGRANT_PATH/src/_htaccess $VAGRANT_PATH/src/.htaccess
+cp -v $VAGRANT_PATH/templates/_htaccess $VAGRANT_PATH/src/.htaccess
 
 echo "---> Create symbolic link to nodejs"
 ln -fvs /usr/bin/nodejs /usr/bin/node
