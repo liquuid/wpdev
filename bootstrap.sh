@@ -55,3 +55,10 @@ echo "---> Restarting apache"
 /etc/init.d/apache2 restart 
 
 echo "<------------- all done ------------->"
+echo 
+echo "Wordpress running on http://localhost:8000
+
+Admin: http://localhost:8000/wp-admin
+username: admin
+password: admin
+"
